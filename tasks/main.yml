@@ -2,6 +2,6 @@
 # tasks file for apigee-opdk-extension-ds
 
 - name: Repair Cassandra nodes
-  shell: '{{ nodetool }} repair'
+  shell: '{{ nodetool }} repair -pr'
   environment:
     JAVA_HOME: '{{ java_home }}'
