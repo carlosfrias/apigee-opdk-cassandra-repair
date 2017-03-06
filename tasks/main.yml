@@ -21,7 +21,8 @@
       environment:
         JAVA_HOME: '{{ java_home }}'
 
-    - name: Retry the streaming repair of Cassandra node
+    - name: Retry streaming nodetool repair, ignoring errors to move on to next node
+      ignore_errors: yes
       shell: '{{ nodetool }} repair -pr'
       environment:
         JAVA_HOME: '{{ java_home }}'
