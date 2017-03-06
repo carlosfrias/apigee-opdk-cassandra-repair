@@ -14,7 +14,7 @@
   rescue:
     - name: Cassandra needs a another minute, then retry
       pause:
-        minute: 1
+        minutes: 1
 
     - name: Try again to streaming repair Cassandra nodes
       shell: '{{ nodetool }} repair -pr'
