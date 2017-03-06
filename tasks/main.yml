@@ -5,10 +5,21 @@
   environment:
     JAVA_HOME: '{{ java_home }}'
 
-- name: Streaming repair Cassandra nodes
-  shell: '{{ nodetool }} repair -pr'
-  environment:
-    JAVA_HOME: '{{ java_home }}'
+- block:
+  - name: Streaming repair Cassandra nodes
+    shell: '{{ nodetool }} repair -pr'
+    environment:
+      JAVA_HOME: '{{ java_home }}'
+
+  rescue:
+    - name: Cassandra needs a another minute, then retry
+      pause:
+        minute: 1
+
+    - name: Try again to streaming repair Cassandra nodes
+      shell: '{{ nodetool }} repair -pr'
+      environment:
+        JAVA_HOME: '{{ java_home }}'
 
 - name: Nodetool flush after repair
   shell: '{{ nodetool }} flush'
