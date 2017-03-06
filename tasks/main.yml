@@ -16,6 +16,11 @@
       pause:
         minutes: 1
 
+    - name: Nodetool flush before repair
+      shell: '{{ nodetool }} flush'
+      environment:
+        JAVA_HOME: '{{ java_home }}'
+
     - name: Try again to streaming repair Cassandra nodes
       shell: '{{ nodetool }} repair -pr'
       environment:
