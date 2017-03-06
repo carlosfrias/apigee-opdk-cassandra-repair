@@ -1,11 +1,16 @@
 ---
 # tasks file for apigee-opdk-extension-ds
-- name: Nodetool flush
+- name: Nodetool flush before repair
   shell: '{{ nodetool }} flush'
   environment:
     JAVA_HOME: '{{ java_home }}'
 
 - name: Streaming repair Cassandra nodes
   shell: '{{ nodetool }} repair -pr'
+  environment:
+    JAVA_HOME: '{{ java_home }}'
+
+- name: Nodetool flush after repair
+  shell: '{{ nodetool }} flush'
   environment:
     JAVA_HOME: '{{ java_home }}'
