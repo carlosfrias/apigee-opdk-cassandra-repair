@@ -1,5 +1,10 @@
 ---
 # tasks file for apigee-opdk-extension-ds
+- name: Nodetool cleanup before flush
+  shell: '{{ nodetool }} cleanup'
+  environment:
+    JAVA_HOME: '{{ java_home }}'
+
 - name: Nodetool flush before repair
   shell: '{{ nodetool }} flush'
   environment:
